@@ -1,6 +1,6 @@
 {
   "name": "Obstracts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Obstracts browser extension is designed to simplify the import process of new blogs viewed in the browser to the Obstracts web app.",
   "private": true,
   "license": "Apache 2.0",
