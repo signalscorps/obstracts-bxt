@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obstracts</title>
+    <style type="text/css">
+        /*body {*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*    align-items: center;*/
+        /*    background: #282a37;*/
+        /*}*/
+        /*https://codepen.io/Manoz/pen/pydxK*/
+        .loading {
+            display: flex;
+            justify-content: center;
+            margin-top: 160px;
+            margin-bottom: 150px;
+        }
+        .loading div {
+            width: 1rem;
+            height: 1rem;
+            margin: 2rem 0.3rem;
+            background: #979fd0;
+            border-radius: 50%;
+            animation: 0.9s bounce infinite alternate;
+        }
+        .loading div:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        .loading div:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        @keyframes bounce {
+            to {
+                opacity: 0.3;
+                transform: translate3d(0, -1rem, 0);
+            }
+        }
+        .donut {
+            width: 2rem;
+            height: 2rem;
+            margin: 2rem;
+            border-radius: 50%;
+            border: 0.3rem solid rgba(151, 159, 208, 0.3);
+            border-top-color: #979fd0;
+            animation: 1.5s spin infinite linear;
+        }
+        .donut.multi {
+            border-bottom-color: #979fd0;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .ripple {
+            width: 2rem;
+            height: 2rem;
+            margin: 2rem;
+            border-radius: 50%;
+            border: 0.3rem solid #979fd0;
+            transform: translate(50%);
+            animation: 1s ripple ease-out infinite;
+        }
+        @keyframes ripple {
+            from {
+                transform: scale(0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+        .multi-ripple {
+            width: 2.6rem;
+            height: 2.6rem;
+            margin: 2rem;
+        }
+        .multi-ripple div {
+            position: absolute;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            border: 0.3rem solid #979fd0;
+            animation: 1.5s ripple infinite;
+        }
+        .multi-ripple div:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        .fancy-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 5rem;
+            height: 5rem;
+        }
+        .fancy-spinner div {
+            position: absolute;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+        }
+        .fancy-spinner div.ring {
+            border-width: 0.5rem;
+            border-style: solid;
+            border-color: transparent;
+            animation: 2s fancy infinite alternate;
+        }
+        .fancy-spinner div.ring:nth-child(1) {
+            border-left-color: #979fd0;
+            border-right-color: #979fd0;
+        }
+        .fancy-spinner div.ring:nth-child(2) {
+            border-top-color: #979fd0;
+            border-bottom-color: #979fd0;
+            animation-delay: 1s;
+        }
+        .fancy-spinner div.dot {
+            width: 1rem;
+            height: 1rem;
+            background: #979fd0;
+        }
+        @keyframes fancy {
+            to {
+                transform: rotate(360deg) scale(0.5);
+            }
+        }
+
+    </style>
+</head>
+
+<body style="width: 600px;">
+
+  <div id="APIKeyScreen" class="card-body" hidden="true">
+    <h2 style="color: black;">Configuration</h2>
+
+    <!-- start form -->
+    <form method="POST" class="post-form custom-validation" id="api_key_form" enctype="multipart/form-data">
+
+      <p><label for="api_key">API Key:</label>
+        <input type="password" name="api_key" class="form-control" minlength="60" maxlength="90"
+               required data-parsley-maxlength="90" data-parsley-minlength="60" id="api_key">
+        <p style="display: none;" id="last_four_chars">
+            Last 4 chars of your password is - <span style="font-weight: bold;" id="api_key_last_four_chars"></span>
+        </p>
+          <span class="helptext">Enter your Obstracts API Key here. If needed, your can generate an API key here (https://app.obstracts.com/integrations/).</span></p>
+
+    </form>
+    <!-- end form -->
+
+    <!-- start actions -->
+    <div class="d-flex justify-content-between">
+      <div class="d-flex ">
+        <button id="saveAPIKeyButton" type="submit" form="api_key_form" class="save btn btn-success save-btn mx-1">
+          <i class="uil uil-file-alt me-1"></i>Save</button>
+      </div>
+    </div>
+    <!-- end actions -->
+  </div>
+
+  <div id="ImportScreen" class="card-body" hidden="true">
+    <h2 style="color: black;">Import this page</h2>
+    <!-- start form -->
+    <form method="POST" class="post-form custom-validation" id="create_collection_form" enctype="multipart/form-data" novalidate="" data-select2-id="create_collection_form">
+<!--      <input type="hidden" name="csrfmiddlewaretoken" value="c9gmEoYJEmqwfQYK7os4XzCoxKslQ2eyDOegwPxsI1Draka7IymKEyTihDR6r5NP">-->
+
+<!--      <link href="/static/jquery.tagsinput-revisited-2.0.min.css" type="text/css" media="all" rel="stylesheet">-->
+<!--      <link href="/static/jquery-ui-1.12.1.min.css" type="text/css" media="all" rel="stylesheet">-->
+<!--      <script src="/static/jquery-3.2.1.min.js"></script>-->
+<!--      <script src="/static/jquery-ui-1.12.1.min.js"></script>-->
+<!--      <script src="/static/jquery.tagsinput-revisited-2.0.min.js"></script>-->
+        <p id="not_rss_notification">We can't identify an RSS or ATOM feed on this page. If you know the feed URL
+            you can enter it below. If an invalid feed URL is entered Obstracts will only import the single static page</p>
+        <p>
+            <label for="url_feed">Feed URL:</label>
+            <input parsley-type="url" type="url" name="url" id="url_feed" class="form-control" required placeholder="" value="">
+            <label for="url_feed">Required. This is the RSS or Atom feed URL for the blog. Usually ends in /rss or /feed (e.g. https://grahamcluley.com/feed/), but can also be slightly different.</label>
+        </p>
+      <p><label for="name_feed">Feed Name:</label>
+        <input type="text" name="name" class="form-control" maxlength="90" data-parsley-maxlength="90" required id="name_feed">
+        <span class="helptext">Required. Useful for helping you remember what this feed is. This is only used in the app user interface.</span></p>
+      <p><label for="description_feed">Description:</label>
+        <textarea name="description" cols="40" rows="4" class="form-control" data-parsley-maxlength="270" maxlength="270" id="description_feed"></textarea>
+        <span class="helptext">Optional. If you need a bit more text than the name field to explain the feed. This is only used in the app user interface.
+        </span></p>
+
+
+        <p><label for="category_feed">Category:</label>
+            <select name="category_feed" class="form-control select2-search-disable" data-live-search="true" id="category_feed">
+                <option value="News">News</option>
+
+                <option value="Blog">Blog</option>
+
+                <option value="Analyst">Analyst</option>
+
+                <option value="Vendor">Vendor</option>
+
+            </select>
+            <span class="helptext"> Required. Categories allow for a more broad classification of intelligence to indicate the feed producers role and biases.
+            </span>
+        </p>
+
+        <p>
+            <label for="id_confidence">Confidence:</label>
+            <input type="text" name="confidence" class="" required id="id_confidence">
+            <span class="helptext">
+                Required. Assigning a confidence score provides a general score of quality for a feed. This value will be assigned to all reports produced by this feed.
+
+            </span>
+        </p>
+
+        <p><label for="id_tag">Tag:</label>
+            <input class="form-control" type="text" name="tag" id="id_tag_tags_input" value="" data-parsley-pattern="^[0-9a-zA-Z\-\,]+$" autocomplete="off"  />
+
+            <span class="helptext">Optional. Tags can be 30 characters (characters allowed: A-Z, 1-9, and -.  Tags will be assigned to all Reports added to this Collection.</span></p>
+
+
+
+
+<!--      <div class="d-flex">-->
+<!--        <div class="form-check mb-3">-->
+<!--          <input class="form-check-input" type="radio" name="formRadios" id="id_use_text" checked="" data-parsley-multiple="formRadios">-->
+<!--          <label class="form-check-label" for="id_use_text">-->
+<!--            Plaintext entry-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        <div class="form-check mx-2">-->
+<!--          <input class="form-check-input" type="radio" name="formRadios" id="id_use_file" data-parsley-multiple="formRadios">-->
+<!--          <label class="form-check-label" for="id_use_file">-->
+<!--            Upload file-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="mb-3 d-none" id="id_text_box" style="min-height: 166px">-->
+<!--        <textarea class="form-control" name="content" id="id_content" rows="7" disabled="disabled"></textarea>-->
+<!--      </div>-->
+
+<!--      <div class="mb-3" id="id_file_box">-->
+<!--        <label class="form-label" for="id_file_type">Please select file type. The maximum file size allowed for upload is 20Mb. If a filetype is not shown or your file is to large please use the plaintext entry to paste content of the Report.</label>-->
+<!--        <input type="text" class="form-control d-none" name="file_type" id="id_file_type" >-->
+<!--        -->
+
+<!--        <div class="mb-3">-->
+<!--          <label class="form-label d-none" for="id_name">File</label>-->
+<!--          <input type="file" class="form-control d-none" data-parsley-file-type=".pdf" name="file" id="id_file" accept=".pdf," value="" required="required">-->
+<!--          <div class=""><span>File selected for upload (maximum allowed file size: 20Mb): </span><span id="id_file_name"></span></div>-->
+<!--        </div>-->
+<!--      </div>-->
+    </form>
+    <!-- end form -->
+
+    <!-- start actions -->
+    <div class="d-flex justify-content-between" style="float: right; margin-bottom: 20px; margin-right: 10px;">
+      <b id="change_api_key" type="button" class="btn btn-info" style="margin-right: 310px; width: 150px;" href="/" >Change API Key</b>
+      <div class="d-flex ">
+
+
+        <button id="startImportButton" type="submit" form="create_collection_form" class="save btn btn-success save-btn mx-1">
+          <i class="uil uil-file-alt me-1"></i>Import</button>
+      </div>
+    </div>
+    <!-- end actions -->
+  </div>
+
+  <div id="SuccessScreen" class="card-body" hidden="true">
+    <h2 style="color: black;">Imported successfully</h2>
+    <p>View it in your feed here:</p>
+    <a id="link_to_feed" src="https://collection">https://collection</a>
+  </div>
+
+  <div id="LoadingScreen" class="loading">
+      <div></div>
+      <div></div>
+      <div></div>
+  </div>
+
+</body>
+
+<link href="/assets/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/assets/_select2.scss" rel="stylesheet" type="text/css" />
+<link href="/assets/jquery-ui-1.12.1.min.css" type="text/css" media="all" rel="stylesheet">
+<script src="/assets/jquery-ui-1.12.1.min.js"></script>
+<link href="/assets/jquery.tagsinput-revisited-2.0.min.css" type="text/css" media="all" rel="stylesheet">
+<script src="/assets/jquery.tagsinput-revisited-2.0.min.js"></script>
+<link href="/assets/ion.rangeSlider.min.css" rel="stylesheet" type="text/css"/>
+
+<link href="/assets/custom.css" id="app-style" rel="stylesheet" type="text/css">
+<link href="/assets/reset.css" rel="stylesheet" type="text/css">
+
+
+</html>
