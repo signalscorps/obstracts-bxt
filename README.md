@@ -8,9 +8,9 @@ The Obstracts browser extension is designed to simplify the import process of ne
 
 You can download the latest version of this extension for:
 
-* [Google Chrome](https://chrome.google.com/webstore/search/stixify)
-* [Mozilla Firefox](https://addons.mozilla.org/en-GB/firefox/search/?q=stixify)
-* [Microsoft Edge](https://microsoftedge.microsoft.com/addons/search/stixify)
+* [Google Chrome](https://chrome.google.com/webstore/search/obstracts)
+* [Mozilla Firefox](https://addons.mozilla.org/en-GB/firefox/search/?q=obstracts)
+* [Microsoft Edge](https://microsoftedge.microsoft.com/addons/search/obstracts)
 
 ### Usage
 
